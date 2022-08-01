@@ -78,15 +78,21 @@ MySQL中的SQL语句是不区分大小写的，因此SELECT和select的作用是
 
 
 
- `select employee_id,last_name,department_id from employees;`
+`SELECT employee_id,last_name,department_id `
+
+`FROM employees;`
 
 
 
-`select employee_id id ,last_name  l_nm ,department_id AS dept_id  from employees;`
+`SELECT employee_id id ,last_name l_nm ,department_id AS dept_id `
+
+`FROM employees;`
 
 
 
-`SELECT last_name "Name", salary*12 "Annual Salary"FROM employees;`
+`SELECT last_name "Name", salary*12 "Annual Salary" `
+
+`FROM employees;`
 
 
 
@@ -145,7 +151,9 @@ SELECT 查询还可以对常数进行查询。对的，就是在 SELECT 查询�
 你可能会问为什么我们还要对常数进行查询呢？
 SQL 中的 SELECT 语法的确提供了这个功能，一般来说我们只从一个表中查询数据，通常不需要增加一个固定的常数列，但如果我们想整合不同的数据源，用常数列作为这个表的标记，就需要查询常数。比如说，我们想对 employees 数据表中的员工姓名进行查询，同时**增加一列固定字段 corporation** ，这个字段固定值为“尚硅谷”，可以这样写：
 
-`SELECT 'Atguigu' as corporation, last_name FROM employees;`
+`SELECT 'Atguigu' as corporation, last_name `
+
+`FROM employees;`
 
 
 
@@ -177,11 +185,14 @@ Extra：表示可以获取的与给定列有关的附加信息，例如AUTO_INCR
 `FROM 表名`
 `WHERE 过滤条件`
 
-使用WHERE 子句，将不满足条件的行过滤掉WHERE子句紧随 FROM子句
+使用WHERE 子句，将不满足条件的行过滤掉WHERE子句紧随 FROM子句。
 
-WHERE 必须紧跟在FROM的后面。
+> WHERE 必须紧跟在FROM的后面
+>
 
 举例:
 
- `select employee_id, last_name, job_id, department_id  from employees where department_id=90;`
+`SELECT employee_id, last_name, job_id, department_id `
+
+`FROM employees WHERE department_id=90;`
 
