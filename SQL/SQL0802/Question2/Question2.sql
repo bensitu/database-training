@@ -13,6 +13,9 @@ INSERT INTO students VALUES(003, '男', '松本義文', '社会', 90);
 INSERT INTO students VALUES(004, '女', '佐竹友香', '理科', 35);
 INSERT INTO students VALUES(004, '女', '佐竹友香', '英語', 22);
 
+#性别が男性である生徒の名前を一覽で表示する
+SELECT * FROM students WHERE sex='男';
+
 #1教科でも30点以下の点数を取った生徒の名前を一覽で表示する
 SELECT * FROM students WHERE score<30;
 
@@ -23,10 +26,10 @@ SELECT * FROM students WHERE course='國語';
 SELECT * FROM students WHERE course='理科' OR course='数学';
 
 #英語テスト参加されてない学生を一覽で表示する
-SELECT * FROM students WHERE course<>'英語';
+SELECT name FROM students WHERE course<>'英語' GROUP BY stu_id having count(stu_id)=2;
 
 #点数を高い順番で表示する
 SELECT * FROM students ORDER BY score DESC;
 
 #すべでの科目テストを参加した人数を表示する
-SELECT * FROM students WHERE course='國語' AND course='英語' AND course='理科' AND course='数学' AND course='社会';
+SELECT course,count(*) FROM students GROUP BY course;
