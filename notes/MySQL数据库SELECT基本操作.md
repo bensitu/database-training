@@ -297,7 +297,6 @@ Extra：表示可以获取的与给定列有关的附加信息，例如AUTO_INCR
 
 举例:
 
-`SELECT employee_id, last_name, job_id, department_id `
+`SELECT employee_id, last_name, job_id, department_id FROM employees WHERE department_id=90;`
 
-`FROM employees WHERE department_id=90;`
-
+`SELECT employee_id, last_name, job_id, department_id FROM employees WHERE department_id=90 ORDER BY employee_id DESC;`
