@@ -6,6 +6,8 @@
 单行注释：-- 注释文字 (--后面必须包含一个空格。)
 多行注释：/* 注释文字 */
 
+
+
 ## 命名规则
 
 - 数据库、表名不得超过30个字符，变量名限制为29个
@@ -29,11 +31,114 @@ select id as "编号",nameas "姓名" from t_stu; #起别名时，as都可以省
 select id as 编号,nameas 姓名 from t_stu; #如果字段别名中没有空格，那么可以省略""
 select id as 编 号,name as 姓 名 from t_stu; #错误，如果字段别名中有空格，那么不能省略""`
 
+
+
 ## 数据导入指令
 
 在命令行客户端登录mysql，使用source指令导入
 
 `mysql> source d:\mysqldb.sql`
+
+
+
+# 数据库的基本操作
+
+## 基本语句
+
+### 展示所有的数据库
+
+`show databases;`
+
+> - “information_schema”是 MySQL 系统自带的数据库，主要保存 MySQL数据库服务器的系统信息，比如数据库的名称、数据表的名称、字段名称、存取权限、数据文件 所在的文件夹和系统使用的文件夹，等等
+> - “performance_schema”是 MySQL 系统自带的数据库，可以用来监控 MySQL 的各类性能指标。
+> - “sys”数据库是 MySQL 系统自带的数据库，主要作用是以一种更容易被理解的方式展示 MySQL数据库服务器的各类性能指标，帮助系统管理员和开发人员监控 MySQL 的技术性能。
+> - “mysql”数据库保存了 MySQL 数据库服务器运行时需要的系统信息，比如数据文件夹、当前使用的字符集、约束检查信息，等等
+
+
+
+### 使用数据库
+
+`USE 数据库名;`
+
+
+
+### 查看某个数据库的所有表
+
+`SHOW TABLES FROM 数据库名;`
+
+
+
+### 创建新的表
+
+`CREATE TABLE 表名称(字段名 数据类型, 字段名 数据类型);`
+
+例：
+
+`CREATE TABLE peoples(`
+
+`id int,`
+
+`name varchar(20), 	#名字不超过20个字符`
+
+`sex varchar(1)` 
+
+`);`
+
+
+
+### 添加一条记录
+
+`INSERT INTO 表名称 VALUES(值列表);`
+
+例：
+
+`INSERT INTO peoples VALUES(1, 'Tom','m');`
+
+`INSERT INTO peoples VALUES(2, 'Mary','f');`
+
+注：5.7版本下因字符集的问题，添加中文会报错。
+
+
+
+### 查看表的创建信息
+
+`SHOW CREATE TABLE 表名称;`
+
+
+
+### 查看数据库的创建信息
+
+`SHOW CREATE DATABASE 数据库名`
+
+
+
+### 删除表
+
+`DROP TBALE 表名称;`
+
+
+
+### 查看编码命令
+
+`SHOW variables like 'character_%';` 
+
+`SHOW variables like 'collation_%';`
+
+
+
+### 编码问题
+
+修改MySQL的数据目录下的my.ini配置文件
+
+在63行添加：
+
+`default-character-set=utf8`
+
+在78行添加：
+
+`character-set-server=utf8` 
+
+`collation-server=utf8_general_ci`
 
 
 
