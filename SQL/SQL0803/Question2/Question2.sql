@@ -4,7 +4,7 @@
 CREATE TABLE userA(user_id Int, user_name VARCHAR(30), email VARCHAR(50), age INT);
 
 #フォローテーブル
-CREATE TABLE followA(follower INT, follow_id Int); 
+CREATE TABLE followA(follower_id INT, followee_id Int); 
 
 #ユーザーテーブルにデータを入力
 INSERT INTO userA VALUES(1, 'もっくん', 'mokkun@example.com', 19);
@@ -27,20 +27,32 @@ INSERT INTO followA VALUES(5, 3);
 INSERT INTO followA VALUES(5, 4);
 
 #さくらがフォローしているユーザーの名前を一覧で表示する
-SELECT followA.follow_id, userA.user_name
-FROM followA JOIN userA 
-ON userA.user_id = followA.follower AND userA.user_id = followA.follower
-WHERE userA.user_name='さくら';
+SELECT u2.user_name
+FROM userA u1 
+INNER JOIN followA f 
+ON u1.user_id = f.follower_id 
+INNER JOIN userA u2
+ON f.followee_id = u2.user_id
+WHERE u1.user_id=3;
 
 #誰もフォローしていないユーザーの名前を表示する
 SELECT userA.user_name
-FROM userA JOIN followA
-ON userA.user_id = followA.follow_id AND userA.user_id = followA.follower
-WHERE followA.follower <> null;
+FROM userA LEFT JOIN followA
+ON userA.user_id = followA.follower_id
+WHERE followA.follower_id IS NULL;
 
 #10代、20代、30代といった年代別にフォロー数の平均点を表示する
-
+SELECT CONCAT((FLOOR(age/10)*10),'代') AS age_group, 
+SUM(CASE WHEN f.follower_id THEN 1 ELSE 0 END) / COUNT(DISTINCT u.user_id) AS avg_count
+FROM userA u 
+LEFT JOIN followA f
+ON u.user_id = f.follower_id
+GROUP BY
+CONCAT((FLOOR(age /10)*10),'代');
 
 #相互フォローしているユーザーのIDを表示する
-SELECT DISTINCT user_id 
-FROM
+SELECT f1.follower_id AS id1, f1.followee_id AS id2
+FROM followA f1
+INNER JOIN followA f2
+ON f1.follower_id = f2.followee_id AND f1.followee_id = f2.follower_id
+WHERE f1.follower_id < f1.followee_id;

@@ -147,7 +147,7 @@ MySQL在执行建表语句时，将id字段的类型设置为int(11)，这里的
 
 #### 追加一个列
 
-语法格式如下：
+使用 **ALTER ... ADD ...** 语法格式如下：
 
 `ALTER TABLE 表名 ADD [COLUMN] 字段名 字段类型 [FIRST|AFTER 字段名];`
 
@@ -159,6 +159,8 @@ MySQL在执行建表语句时，将id字段的类型设置为int(11)，这里的
 
 #### 修改一个列
 
+使用 **ALTER ... MODIFY ...**：
+
 - 可以修改列的数据类型，长度、默认值和位置
 - 修改字段数据类型、长度、默认值、位置的语法格式如下：
 
@@ -168,11 +170,13 @@ MySQL在执行建表语句时，将id字段的类型设置为int(11)，这里的
 
 `ALTER TABLE dept80 MODIFY last_name VARCHAR(30);`
 
+注： 不能重命名列
+
 
 
 #### 重命名一个列
 
-使用 CHANGE old_column new_column dataType 子句重命名列。语法格式如下：
+使用 **CHANGE** old_column new_column dataType 子句重命名列。语法格式如下：
 
 `ALTER TABLE 表名 CHANGE 列名 新列名 新数据类型;`
 
@@ -184,7 +188,7 @@ MySQL在执行建表语句时，将id字段的类型设置为int(11)，这里的
 
 #### 删除一个列
 
-删除表中某个字段的语法格式如下：
+使用**ALTER ... DROP ...** 删除表中某个字段的语法格式如下：
 
 `ALTER TABLE 表名 DROP 字段名`
 
