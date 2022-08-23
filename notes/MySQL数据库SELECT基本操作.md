@@ -1,4 +1,4 @@
-# MySQL数据库
+# MySQL 数据库
 
 ## 注释
 
@@ -164,7 +164,7 @@ collation-server=utf8_general_ci
 
 
 
-## 基本的SELECT语句
+## 基本的 SELECT 语句
 
 **SELECT … FROM ...**
 
