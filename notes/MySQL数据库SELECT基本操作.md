@@ -19,17 +19,19 @@
 
 举例：
 
-`#以下两句是一样的，不区分大小写`
-`show databases;`
-`SHOW DATABASES;`
-`#创建表格`
-`#create table student info(...); #表名错误，因为表名有空格`
-`create table student_info(...);`
-`#其中order使用飘号，因为order和系统关键字或系统函数名等预定义标识符重名了
+```sql
+#以下两句是一样的，不区分大小写
+show databases;
+SHOW DATABASES;
+#创建表格
+#create table student info(...); #表名错误，因为表名有空格
+create table student_info(...);
+#其中order使用飘号，因为order和系统关键字或系统函数名等预定义标识符重名了
 CREATE TABLEorder();
 select id as "编号",nameas "姓名" from t_stu; #起别名时，as都可以省略
 select id as 编号,nameas 姓名 from t_stu; #如果字段别名中没有空格，那么可以省略""
-select id as 编 号,name as 姓 名 from t_stu; #错误，如果字段别名中有空格，那么不能省略""`
+select id as 编 号,name as 姓 名 from t_stu; #错误，如果字段别名中有空格，那么不能省略""
+```
 
 
 
@@ -37,7 +39,9 @@ select id as 编 号,name as 姓 名 from t_stu; #错误，如果字段别名中
 
 在命令行客户端登录mysql，使用source指令导入
 
-`mysql> source d:\mysqldb.sql`
+```mysql
+mysql> source d:\mysqldb.sql
+```
 
 
 
@@ -47,7 +51,9 @@ select id as 编 号,name as 姓 名 from t_stu; #错误，如果字段别名中
 
 ### 展示所有的数据库
 
-`show databases;`
+```sql
+show databases;
+```
 
 > - “information_schema”是 MySQL 系统自带的数据库，主要保存 MySQL数据库服务器的系统信息，比如数据库的名称、数据表的名称、字段名称、存取权限、数据文件 所在的文件夹和系统使用的文件夹，等等
 > - “performance_schema”是 MySQL 系统自带的数据库，可以用来监控 MySQL 的各类性能指标。
@@ -58,43 +64,48 @@ select id as 编 号,name as 姓 名 from t_stu; #错误，如果字段别名中
 
 ### 使用数据库
 
-`USE 数据库名;`
+```sql
+USE 数据库名;
+```
 
 
 
 ### 查看某个数据库的所有表
 
-`SHOW TABLES FROM 数据库名;`
+```sql
+SHOW TABLES FROM 数据库名;
+```
 
 
 
 ### 创建新的表
 
-`CREATE TABLE 表名称(字段名 数据类型, 字段名 数据类型);`
+```sql
+CREATE TABLE 表名称(字段名 数据类型, 字段名 数据类型);
 
 例：
-
-`CREATE TABLE peoples(`
-
-`id int,`
-
-`name varchar(20), 	#名字不超过20个字符`
-
-`sex varchar(1)` 
-
-`);`
+CREATE TABLE peoples(
+id int,
+name varchar(20), 	#名字不超过20个字符
+sex varchar(1) 
+);
+```
 
 
 
 ### 添加一条记录
 
-`INSERT INTO 表名称 VALUES(值列表);`
+```sql
+INSERT INTO 表名称 VALUES(值列表);
+```
 
 例：
 
-`INSERT INTO peoples VALUES(1, 'Tom','m');`
+```sql
+INSERT INTO peoples VALUES(1, 'Tom','m');
 
-`INSERT INTO peoples VALUES(2, 'Mary','f');`
+INSERT INTO peoples VALUES(2, 'Mary','f');
+```
 
 注：5.7版本下因字符集的问题，添加中文会报错。
 
@@ -102,27 +113,35 @@ select id as 编 号,name as 姓 名 from t_stu; #错误，如果字段别名中
 
 ### 查看表的创建信息
 
-`SHOW CREATE TABLE 表名称;`
+```sql
+SHOW CREATE TABLE 表名称;
+```
 
 
 
 ### 查看数据库的创建信息
 
-`SHOW CREATE DATABASE 数据库名`
+```sql
+SHOW CREATE DATABASE 数据库名;
+```
 
 
 
 ### 删除表
 
-`DROP TBALE 表名称;`
+```sql
+DROP TBALE 表名称;
+```
 
 
 
 ### 查看编码命令
 
-`SHOW variables like 'character_%';` 
+```sql
+SHOW variables like 'character_%'; 
 
-`SHOW variables like 'collation_%';`
+SHOW variables like 'collation_%';
+```
 
 
 
@@ -132,35 +151,43 @@ select id as 编 号,name as 姓 名 from t_stu; #错误，如果字段别名中
 
 在63行添加：
 
-`default-character-set=utf8`
+```ini
+default-character-set=utf8
+```
 
 在78行添加：
 
-`character-set-server=utf8` 
-
-`collation-server=utf8_general_ci`
+```ini
+character-set-server=utf8 
+collation-server=utf8_general_ci
+```
 
 
 
 ## 基本的SELECT语句
 
 **SELECT … FROM ...**
+
 语法：
 
-`SELECT 标识选择哪些列`
-`FROM 标识从哪个表中选择`
-
-
+```sql
+SELECT 标识选择哪些列
+FROM 标识从哪个表中选择
+```
 
 选择全部列：
 
-`SELECT *`
-`FROM departments;`
+```sql
+SELECT *
+FROM departments;
+```
 
 选择特定的列：
 
-`SELECT department_id, location_id`
-`FROM departments;`
+```sql
+SELECT department_id, location_id
+FROM departments;
+```
 
 
 MySQL中的SQL语句是不区分大小写的，因此SELECT和select的作用是相同的。
@@ -178,26 +205,20 @@ MySQL中的SQL语句是不区分大小写的，因此SELECT和select的作用是
 - 建议别名简短，见名知意
 
 举例
-`SELECT last_name AS name, commission_pct comm`
-`FROM employees;`
 
+```sql
+SELECT last_name AS name, commission_pct comm
+FROM employees;
 
+SELECT employee_id,last_name,department_id
+FROM employees;
 
-`SELECT employee_id,last_name,department_id `
+SELECT employee_id id ,last_name l_nm ,department_id AS dept_id
+FROM employees;
 
-`FROM employees;`
-
-
-
-`SELECT employee_id id ,last_name l_nm ,department_id AS dept_id `
-
-`FROM employees;`
-
-
-
-`SELECT last_name "Name", salary*12 "Annual Salary" `
-
-`FROM employees;`
+SELECT last_name "Name", salary*12 "Annual Salary"
+FROM employees;
+```
 
 
 
@@ -205,14 +226,17 @@ MySQL中的SQL语句是不区分大小写的，因此SELECT和select的作用是
 
 默认情况下，查询会返回全部行，包括重复行。在SELECT语句中使用关键字DISTINCT去除重复行。
 
-`SELECT DISTINCT department_id`
-`FROM employees;`
-
+```sql
+SELECT DISTINCT department_id
+FROM employees;
+```
 
 针对于：
 
-`SELECT DISTINCT department_id,salary`
-`FROM employees;`
+```sql
+SELECT DISTINCT department_id, salary
+FROM employees;
+```
 
 > 这里有两点需要注意：
 >
@@ -225,9 +249,11 @@ MySQL中的SQL语句是不区分大小写的，因此SELECT和select的作用是
 
 所有运算符或列值遇到null值，运算的结果都为null
 
-`SELECT employee_id,salary,commission_pct,`
-`12 * salary * (1 + commission_pct) "annual_sal"`
-`FROM employees;`
+```sql
+SELECT employee_id, salary, commission_pct,
+12 * salary * (1 + commission_pct) "annual_sal"
+FROM employees;
+```
 
 在 MySQL 里面， 空值不等于空字符串。一个空字符串的长度是 0，而一个空值的长度是空。而且，在 MySQL 里面，空值是占用空间的。null不等同于0、’ ’ 以及’null’.
 
@@ -239,11 +265,15 @@ MySQL中的SQL语句是不区分大小写的，因此SELECT和select的作用是
 
 错误的:
 
-`SELECT * FROM ORDER;`
+```sql
+SELECT * FROM ORDER;
+```
 
 正确的:
 
-SELECT * FROM `ORDER;
+```sql
+SELECT * FROM `ORDER`;
+```
 
 结论:
 要保证表中的字段、表名等没有和保留字、数据库系统或常用方法冲突。如果真的相同，请在SQL语句中使用一对``（着重号）引起来。
@@ -256,9 +286,10 @@ SELECT 查询还可以对常数进行查询。对的，就是在 SELECT 查询�
 你可能会问为什么我们还要对常数进行查询呢？
 SQL 中的 SELECT 语法的确提供了这个功能，一般来说我们只从一个表中查询数据，通常不需要增加一个固定的常数列，但如果我们想整合不同的数据源，用常数列作为这个表的标记，就需要查询常数。比如说，我们想对 employees 数据表中的员工姓名进行查询，同时**增加一列固定字段 corporation** ，这个字段固定值为“尚硅谷”，可以这样写：
 
-`SELECT 'Atguigu' as corporation, last_name `
-
-`FROM employees;`
+```sql
+SELECT 'Atguigu' as corporation, last_name
+FROM employees;
+```
 
 
 
@@ -266,9 +297,11 @@ SQL 中的 SELECT 语法的确提供了这个功能，一般来说我们只从�
 
 使用DESCRIBE 或 DESC 命令，表示表结构。
 
-`DESCRIBE employees;`
+```sql
+DESCRIBE employees;
 或
-`DESC employees;`
+DESC employees;
+```
 
 其中，各个字段的含义分别解释如下：
 Field：表示字段名称。
@@ -286,9 +319,11 @@ Extra：表示可以获取的与给定列有关的附加信息，例如AUTO_INCR
 
 语法：
 
-`SELECT 字段1,字段2`
-`FROM 表名`
-`WHERE 过滤条件`
+```sql
+SELECT 字段1,字段2
+FROM 表名
+WHERE 过滤条件
+```
 
 使用WHERE 子句，将不满足条件的行过滤掉WHERE子句紧随 FROM子句。
 
@@ -297,6 +332,9 @@ Extra：表示可以获取的与给定列有关的附加信息，例如AUTO_INCR
 
 举例:
 
-`SELECT employee_id, last_name, job_id, department_id FROM employees WHERE department_id=90;`
+```sql
+SELECT employee_id, last_name, job_id, department_id FROM employees WHERE department_id=90;
 
-`SELECT employee_id, last_name, job_id, department_id FROM employees WHERE department_id=90 ORDER BY employee_id DESC;`
+SELECT employee_id, last_name, job_id, department_id FROM employees WHERE department_id=90 ORDER BY employee_id DESC;
+```
+

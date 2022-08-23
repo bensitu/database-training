@@ -237,7 +237,7 @@ TRUNCATE TABLE语句：
 
 
 
-## 拓展
+## 表的拓展
 
 【强制 】表名、字段名必须使用小写字母或数字，禁止出现数字开头，禁止两个下划线中间只出现数字。数据库字段名的修改代价很大，因为无法进行预发布，所以字段名称需要慎重考虑。
 
@@ -256,3 +256,124 @@ TRUNCATE TABLE语句：
   【推荐 】库名与应用名称尽量一致。
   【参考】合适的字符存储长度，不但节约数据库表空间、节约索引存储，更重要的是提升检索速度。
 - 正例：无符号值可以避免误存负数，且扩大了表示范围。
+
+
+
+## 数据处理之增删改
+
+### 插入数据
+
+#### 方式1：VALUES的方式添加
+
+使用这种语法一次只能向表中插入一条数据。
+
+**情况1：为表的所有字段按默认顺序插入数据**
+
+`INSERT INTO 目标表名 VALUES (value1,value2,....);`
+
+值列表中需要为表的每一个字段指定值，并且值的顺序必须和数据表中字段定义时的顺序相同。
+
+
+
+**情况2：为表的指定字段插入数据**
+
+`INSERT INTO 目标表名(column1 [, column2, …, columnn])` 
+
+`VALUES (value1 [,value2, …, valuen]);`
+
+为表的指定字段插入数据，就是在INSERT语句中只向部分字段中插入值，而其他字段的值为表定义时的默认值。
+
+在 INSERT 子句中随意列出列名，但是一旦列出，VALUES中要插入的value1,…valuen需要与column1,…columnn列一一对应。如果类型不同，将无法插入，并且MySQL会产生错误。
+
+
+**情况3：同时插入多条记录**
+
+INSERT语句可以同时向数据表中插入多条记录，插入时指定多个值列表，每个值列表之间用逗号分隔开，基本语法格式如下：
+
+`INSERT INTO 目标表名`
+`VALUES`
+`(value1 [,value2, …, valuen]),`
+`(value1 [,value2, …, valuen]),`
+`……`
+`(value1 [,value2, …, valuen]);`
+
+或者
+
+`INSERT INTO 目标表名(column1 [, column2, …, columnn])`
+`VALUES`
+`(value1 [,value2, …, valuen]),`
+`(value1 [,value2, …, valuen]),`
+`……`
+`(value1 [,value2, …, valuen]);`
+
+一个同时插入多行记录的INSERT语句等同于多个单行插入的INSERT语句，但是多行的INSERT语句在处理过程中 效率更高 。因为MySQL执行单条INSERT语句插入多行数据比使用多条INSERT语句快，所以在插入多条记录时最好选择使用单条INSERT语句的方式插入。
+
+
+
+#### 方式2：将查询结果插入到表中
+
+INSERT还可以将SELECT语句查询的结果插入到表中，此时不需要把每一条记录的值一个一个输入，只需要使用一条INSERT语句和一条SELECT语句组成的组合语句即可快速地从一个或多个表中向一个表中插入多行。
+
+基本语法格式如下：
+
+`INSERT INTO 目标表名`
+`(tar_column1 [, tar_column2, …, tar_columnn])`
+`SELECT`
+`(src_column1 [, src_column2, …, src_columnn])`
+`FROM 源表名`
+`[WHERE condition]`
+
+- 在 INSERT 语句中加入子查询。
+- 不必书写 VALUES 子句。
+- 子查询中的值列表应与 INSERT 子句中的列名对应。
+
+
+
+### 更新数据
+
+使用 UPDATE 语句更新数据。语法如下：
+
+`UPDATE 目标表名`
+`SET column1=value1, column2=value2, … , column=valuen [WHERE condition]`
+
+- 可以一次更新多条数据。
+- 如果需要回滚数据，需要保证在DML前，进行设置：SET AUTOCOMMIT = FALSE;
+
+使用 WHERE 子句指定需要更新的数据。如果省略 WHERE 子句，则表中的所有数据都将被更新。
+
+
+
+### 删除数据
+
+使用 DELETE 语句从表中删除数据。语法如下：
+
+`DELETE FROM 目标表名 [WHERE <condition>];`
+
+目标表名 指定要执行删除操作的表；“[WHERE ]”为可选参数，指定删除条件，如果没有WHERE子句，DELETE语句将删除表中的所有记录。
+
+
+
+
+
+### MySQL8新特性：计算列
+
+在MySQL 8.0中，CREATE TABLE 和 ALTER TABLE 中都支持增加计算列。
+
+举例：定义数据表tb1，然后定义字段id、字段a、字段b和字段c，其中字段c为计算列，用于计算a+b的值。 首先创建测试表tb1，语句如下：
+
+`CREATE TABLE tb1(`
+`id INT,`
+`a	INT, b INT,`
+`c INT GENERATED ALWAYS AS (a + b) VIRTUAL );`
+
+插入演示数据，语句如下：
+
+`INSERT INTO tb1(a,b) VALUES (100,200);`
+
+查询数据表tb1中的数据，结果如下：
+
+`SELECT * FROM	tb1;`
+
+ id	a	b	c
+
+NULL	100	200	300
