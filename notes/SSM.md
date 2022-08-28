@@ -8336,8 +8336,7 @@ return page;
 <link rel="stylesheet" th:href="@{/static/css/index_work.css}">
 </head>
 <body>
-```
-```
+
 <table>
 <tr>
 <th colspan="6">Employee Info</th>
@@ -8367,8 +8366,7 @@ return page;
 <a th:href="@{/employee/page/1}">首页</a>
 <a th:href="@{'/employee/page/'+${page.prePage}}">上一页</a>
 </span>
-```
-```
+
 <span th:each="num : ${page.navigatepageNums}">
 <a th:if="${page.pageNum==num}"
 th:href="@{'/employee/page/'+${num}}" th:text="'['+${num}+']'" style="color:
@@ -8376,8 +8374,7 @@ red;"></a>
 <a th:if="${page.pageNum!=num}"
 th:href="@{'/employee/page/'+${num}}" th:text="${num} "></a>
 </span>
-```
-```
+
 <span th:if="${page.hasNextPage}">
 <a th:href="@{'/employee/page/'+${page.nextPage}}">下一页</a>
 <a th:href="@{'/employee/page/'+${page.pages}}">末页</a>
@@ -8385,14 +8382,12 @@ th:href="@{'/employee/page/'+${num}}" th:text="${num} "></a>
 </td>
 </tr>
 </table>
+</body>
+</html>
 ```
 
 ③访问测试分页功能
 
 localhost:8080/employee/page/1
 
-```html
-</body>
-</html>
-```
 
