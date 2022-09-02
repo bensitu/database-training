@@ -659,6 +659,7 @@ public class App{
 ```java
 public class ServletContainersInitConfig extends AbstractDispatcherServletInitializer {
     protected WebApplicationContext createServletApplicationContext() {
+      //加载SpringMVC容器
         AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(SpringMvcConfig.class);
         return ctx;
@@ -667,6 +668,7 @@ public class ServletContainersInitConfig extends AbstractDispatcherServletInitia
         return new String[]{"/"};
     }
     protected WebApplicationContext createRootApplicationContext() {
+      //加载Spring容器
       AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
         ctx.register(SpringConfig.class);
         return ctx;
