@@ -9,32 +9,32 @@
 >* 掌握RESTful风格及其使用
 >* 完成基于RESTful的案例编写
 
-SpringMVC是隶属于Spring框架的一部分，主要是用来进行Web开发，是对Servlet进行了封装。
+SpringMVC 是隶属于 Spring 框架的一部分，主要是用来进行 Web 开发，是对 Servlet 进行了封装。
 
-对于SpringMVC我们主要学习如下内容:
+对于 SpringMVC 我们主要学习如下内容:
 
-* SpringMVC简介
+* SpringMVC 简介
 * ==请求与响应==
-* ==REST风格==
-* ==SSM整合(注解版)==
+* ==REST 风格==
+* ==SSM 整合(注解版)==
 * 拦截器
 
-SpringMVC是处于Web层的框架，所以其主要的作用就是用来接收前端发过来的请求和数据然后经过处理并将处理的结果响应给前端，所以如何处理请求和响应是SpringMVC中非常重要的一块内容。
+SpringMVC 是处于 Web 层的框架，所以其主要的作用就是用来接收前端发过来的请求和数据然后经过处理并将处理的结果响应给前端，所以如何处理请求和响应是 SpringMVC 中非常重要的一块内容。
 
-REST是一种软件架构风格，可以降低开发的复杂性，提高系统的可伸缩性，后期的应用也是非常广泛。
+REST 是一种软件架构风格，可以降低开发的复杂性，提高系统的可伸缩性，后期的应用也是非常广泛。
 
-SSM整合是把咱们所学习的SpringMVC+Spring+Mybatis整合在一起来完成业务开发，是对我们所学习这三个框架的一个综合应用。
+SSM 整合是把咱们所学习的 SpringMVC+Spring+Mybatis 整合在一起来完成业务开发，是对我们所学习这三个框架的一个综合应用。
 
-对于SpringMVC的学习，最终要达成的目标:
+对于 SpringMVC 的学习，最终要达成的目标:
 
-1. ==掌握基于SpringMVC获取请求参数和响应json数据操作==
-2. ==熟练应用基于REST风格的请求路径设置与参数传递==
+1. ==掌握基于 SpringMVC 获取请求参数和响应 json 数据操作==
+2. ==熟练应用基于 REST 风格的请求路径设置与参数传递==
 3. 能够根据实际业务建立前后端开发通信协议并进行实现
-4. ==基于SSM整合技术开发任意业务模块功能==
+4. ==基于 SSM 整合技术开发任意业务模块功能==
 
-## 1，SpringMVC概述
+## 1，SpringMVC 概述
 
-学习SpringMVC我们先来回顾下现在web程序是如何做的，咱们现在web程序大都基于三层架构来实现。
+学习 SpringMVC 我们先来回顾下现在 web 程序是如何做的，咱们现在 web 程序大都基于三层架构来实现。
 
 三层架构
 
@@ -80,7 +80,7 @@ SSM整合是把咱们所学习的SpringMVC+Spring+Mybatis整合在一起来完�
 
   这里所说的优点，就需要我们在使用的过程中慢慢体会。
 
-## 2，SpringMVC入门案例
+## 2，SpringMVC 入门案例
 
 因为SpringMVC是一个Web框架，将来是要替换Servlet,所以先来回顾下以前Servlet是如何进行开发的?
 
@@ -112,9 +112,9 @@ SpringMVC的制作过程和上述流程几乎是一致的，具体的实现流�
 
 ### 2.2 案例制作
 
-#### 步骤1:创建Maven项目
+#### 步骤1:创建 Maven 项目
 
-打开IDEA,创建一个新的web项目
+打开 IDEA,创建一个新的 web 项目
 
 ![1630428920116](Resources/1630428920116.png)
 
@@ -186,7 +186,7 @@ public class SpringMvcConfig {
 }
 ```
 
-#### 步骤5:创建Controller类
+#### 步骤5:创建 Controller 类
 
 ```java
 @Controller
@@ -200,7 +200,7 @@ public class UserController {
 
 ```
 
-#### 步骤6:使用配置类替换web.xml
+#### 步骤6:使用配置类替换 web.xml
 
 将web.xml删除，换成ServletContainersInitConfig
 
@@ -227,7 +227,7 @@ public class ServletContainersInitConfig extends AbstractDispatcherServletInitia
 }
 ```
 
-#### 步骤7:配置Tomcat环境
+#### 步骤7:配置 Tomcat 环境
 
 ![1630430302683](Resources/1630430302683.png)
 
@@ -239,11 +239,11 @@ public class ServletContainersInitConfig extends AbstractDispatcherServletInitia
 
 浏览器输入`http://localhost/save`进行访问，会报如下错误:
 
-#### ![1630430401561](Resources/1630430401561.png)
+![1630430401561](Resources/1630430401561.png)
 
 页面报错的原因是后台没有指定返回的页面，目前只需要关注控制台看`user save ...`有没有被执行即可。
 
-#### 步骤10:修改Controller返回值解决上述问题
+#### 步骤10:修改 Controller 返回值解决上述问题
 
 前面我们说过现在主要的是前端发送异步请求，后台响应json数据，所以接下来我们把Controller类的save方法进行修改
 
@@ -706,9 +706,9 @@ public class ServletContainersInitConfig extends AbstractAnnotationConfigDispatc
 | 作用     | 设置spring配置类扫描路径，用于加载使用注解格式定义的bean     |
 | 相关属性 | excludeFilters:排除扫描路径中加载的bean,需要指定类别(type)和具体项(classes)<br/>includeFilters:加载指定的bean，需要指定类别(type)和具体项(classes) |
 
-## 3，PostMan工具的使用
+## 3，PostMan 工具的使用
 
-### 3.1 PostMan简介
+### 3.1 PostMan 简介
 
 代码编写完后，我们要想测试，只需要打开浏览器直接输入地址发送请求即可。发送的是`GET`请求可以直接使用浏览器，但是如果要发送的是`POST`请求呢?
 
@@ -723,7 +723,7 @@ public class ServletContainersInitConfig extends AbstractAnnotationConfigDispatc
   * 美观
   * 大方
 
-### 3.2 PostMan安装
+### 3.2 PostMan 安装
 
 双击`资料\Postman-win64-8.3.1-Setup.exe`即可自动安装，
 
@@ -735,9 +735,9 @@ public class ServletContainersInitConfig extends AbstractAnnotationConfigDispatc
 
 ![1630463887711](Resources/1630463887711.png)
 
-### 3.3 PostMan使用
+### 3.3 PostMan 使用
 
-#### 3.3.1 创建WorkSpace工作空间
+#### 3.3.1 创建 WorkSpace 工作空间
 
 ![](Resources/image-20210805150044862.png)
 
@@ -895,7 +895,7 @@ public class ServletContainersInitConfig extends AbstractAnnotationConfigDispatc
 
 #### 4.1.3 设置映射路径
 
-##### 步骤1:修改Controller
+##### 步骤1:修改 Controller
 
 ```java
 @Controller
@@ -1611,7 +1611,7 @@ SpringMVC接收JSON数据的实现步骤为:
 | 位置 | SpringMVC控制器方法形参定义前面                              |
 | 作用 | 将请求中请求体所包含的数据传递给请求参数，此注解一个处理器方法只能使用一次 |
 
-#### @RequestBody与@RequestParam区别
+#### @RequestBody 与 @RequestParam 区别
 
 * 区别
   * @RequestParam用于接收url地址传参，表单传参【application/x-www-form-urlencoded】
