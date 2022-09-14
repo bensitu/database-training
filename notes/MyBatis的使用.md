@@ -1,13 +1,13 @@
-# Mybatis简介
-## MyBatis历史
+# Mybatis 简介
+## MyBatis 历史
 -    MyBatis最初是Apache的一个开源项目iBatis, 2010年6月这个项目由Apache Software Foundation迁移到了Google Code。随着开发团队转投Google Code旗下，iBatis3.x正式更名为MyBatis。代码于2013年11月迁移到Github
 - iBatis一词来源于“internet”和“abatis”的组合，是一个基于Java的持久层框架。iBatis提供的持久层框架包括SQL Maps和Data Access Objects（DAO）
-## MyBatis特性
+## MyBatis 特性
 1. MyBatis 是支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架
 2. MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集
 3. MyBatis可以使用简单的XML或注解用于配置和原始映射，将接口和Java的POJO（Plain Old Java Objects，普通的Java对象）映射成数据库中的记录
 4. MyBatis 是一个 半自动的ORM（Object Relation Mapping）框架
-## MyBatis下载
+## MyBatis 下载
 - [MyBatis下载地址](https://github.com/mybatis/mybatis-3)
 - ![](Resources/MyBatis下载.png)
 ## 和其它持久化层技术对比
@@ -25,15 +25,16 @@
 	- 轻量级，性能出色  
 	- SQL 和 Java 编码分开，功能边界清晰。Java代码专注业务、SQL语句专注数据  
 	- 开发效率稍逊于HIbernate，但是完全能够接受
-# 搭建MyBatis
+# 搭建 MyBatis
 ## 开发环境
 - IDE：idea 2019.2  
 - 构建工具：maven 3.5.4  
 - MySQL版本：MySQL 5.7  
 - MyBatis版本：MyBatis 3.5.7
-## 创建maven工程
+## 创建 maven 工程
 - 打包方式：jar
 - 引入依赖
+
 	```xml
 	<dependencies>
 		<!-- Mybatis核心 -->
@@ -57,7 +58,7 @@
 			</dependency>
 	</dependencies>
 	```
-## 创建MyBatis的核心配置文件
+## 创建 MyBatis 的核心配置文件
 >习惯上命名为`mybatis-config.xml`，这个文件名仅仅只是建议，并非强制要求。将来整合Spring之后，这个配置文件可以省略，所以大家操作时可以直接复制、粘贴。
 >核心配置文件主要用于配置连接数据库的环境以及MyBatis的全局配置信息
 >核心配置文件存放的位置是src/main/resources目录下
@@ -85,7 +86,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	</mappers>  
 </configuration>
 ```
-## 创建mapper接口
+## 创建 mapper 接口
 >MyBatis中的mapper接口相当于以前的dao。但是区别在于，mapper仅仅是接口，我们不需要提供实现类
 ```java
 package com.atguigu.mybatis.mapper;  
@@ -97,7 +98,7 @@ public interface UserMapper {
 	int insertUser();  
 }
 ```
-## 创建MyBatis的映射文件
+## 创建 MyBatis 的映射文件
 - 相关概念：ORM（Object Relationship Mapping）对象关系映射。  
 	- 对象：Java的实体类对象  
 	- 关系：关系型数据库  
@@ -130,7 +131,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>  
 </mapper>
 ```
-## 通过junit测试功能
+## 通过 junit 测试功能
 - SqlSession：代表Java程序和数据库之间的会话。（HttpSession是Java程序和浏览器之间的会话）
 - SqlSessionFactory：是“生产”SqlSession的“工厂”
 - 工厂模式：如果创建某一个对象，使用的过程基本固定，那么我们就可以把创建这个对象的相关代码封装到一个“工厂类”中，以后都使用这个工厂类来“生产”我们需要的对象
@@ -159,7 +160,7 @@ public class UserMapperTest {
 }
 ```
 - 此时需要手动提交事务，如果要自动提交事务，则在获取sqlSession对象时，使用`SqlSession sqlSession = sqlSessionFactory.openSession(true);`，传入一个Boolean类型的参数，值为true，这样就可以自动提交
-## 加入log4j日志功能
+## 加入 log4j 日志功能
 1. 加入依赖
 	```xml
 	<!-- log4j日志 -->
@@ -281,7 +282,7 @@ properties、settings、typeAliases、typeHandlers、objectFactory、objectWrapp
 # 默认的类型别名
 ![](Resources/默认的类型别名1.png)
 ![](Resources/默认的类型别名2.png)
-# MyBatis的增删改查
+# MyBatis 的增删改查
 1. 添加
 	```xml
 	<!--int insertUser();-->
@@ -318,11 +319,12 @@ properties、settings、typeAliases、typeHandlers、objectFactory、objectWrapp
 	</select>
 	```
 - 注意：
+
 	1. 查询的标签select必须设置属性resultType或resultMap，用于设置实体类和数据库表的映射关系  
 		- resultType：自动映射，用于属性名和表中字段名一致的情况  
 		- resultMap：自定义映射，用于一对多或多对一或字段名和属性名不一致的情况  
 	2. 当查询的数据为多条时，不能使用实体类作为返回值，只能使用集合，否则会抛出异常TooManyResultsException；但是若查询的数据只有一条，可以使用实体类或集合作为返回值
-# MyBatis获取参数值的两种方式（重点）
+# MyBatis 获取参数值的两种方式（重点）
 - MyBatis获取参数值的两种方式：${}和#{}  
 - ${}的本质就是字符串拼接，#{}的本质就是占位符赋值  
 - ${}使用字符串拼接的方式拼接sql，若为字符串类型或日期类型的字段进行赋值时，需要手动加单引号；但是#{}使用占位符赋值的方式拼接sql，此时为字符串类型或日期类型的字段进行赋值时，可以自动添加单引号
@@ -342,6 +344,7 @@ properties、settings、typeAliases、typeHandlers、objectFactory、objectWrapp
 ```
 ## 多个字面量类型的参数
 - 若mapper接口中的方法参数为多个时，此时MyBatis会自动将这些参数放在一个map集合中
+
 	1. 以arg0,arg1...为键，以参数为值；
 	2. 以param1,param2...为键，以参数为值；
 - 因此只需要通过\${}和#{}访问map集合的键就可以获取相对应的值，注意${}需要手动加单引号。
@@ -358,7 +361,7 @@ properties、settings、typeAliases、typeHandlers、objectFactory、objectWrapp
 	select * from t_user where username = '${param1}' and password = '${param2}'
 </select>
 ```
-## map集合类型的参数
+## map 集合类型的参数
 - 若mapper接口中的方法需要的参数为多个时，此时可以手动创建map集合，将这些数据放在map中只需要通过\${}和#{}访问map集合的键就可以获取相对应的值，注意${}需要手动加单引号
 ```xml
 <!--User checkLoginByMap(Map<String,Object> map);-->
@@ -397,6 +400,7 @@ public void insertUser() {
 ```
 ## 使用@Param标识参数
 - 可以通过@Param注解标识mapper接口中的方法参数，此时，会将这些参数放在map集合中 
+
 	1. 以@Param注解的value属性值为键，以参数为值；
 	2. 以param1,param2...为键，以参数为值；
 - 只需要通过\${}和#{}访问map集合的键就可以获取相对应的值，注意${}需要手动加单引号
@@ -416,9 +420,10 @@ public void checkLoginByParam() {
 ```
 ## 总结
 - 建议分成两种情况进行处理
+
 	1. 实体类类型的参数
 	2. 使用@Param标识参数
-# MyBatis的各种查询功能
+# MyBatis 的各种查询功能
 1. 如果查询出的数据只有一条，可以通过
 	1. 实体类对象接收
 	2. List集合接收
@@ -474,7 +479,7 @@ int getCount();
 	select count(id) from t_user
 </select>
 ```
-## 查询一条数据为map集合
+## 查询一条数据为 map 集合
 ```java
 /**  
  * 根据用户id查询用户信息为map集合  
@@ -490,7 +495,7 @@ Map<String, Object> getUserToMap(@Param("id") int id);
 </select>
 <!--结果：{password=123456, sex=男, id=1, age=23, username=admin}-->
 ```
-## 查询多条数据为map集合
+## 查询多条数据为 map 集合
 ### 方法一
 ```java
 /**  
@@ -536,7 +541,7 @@ Map<String, Object> getAllUserToMap();
 	}
 -->
 ```
-# 特殊SQL的执行
+# 特殊 SQL 的执行
 ## 模糊查询
 ```java
 /**
@@ -635,8 +640,8 @@ public void insertUser() {
 	//输出：user{id=10, username='ton', password='123', age=23, sex='男', email='123@321.com'}，自增主键存放到了user的id属性中
 }
 ```
-# 自定义映射resultMap
-## resultMap处理字段和属性的映射关系
+# 自定义映射 resultMap
+## resultMap 处理字段和属性的映射关系
 - resultMap：设置自定义映射  
 	- 属性：  
 		- id：表示自定义映射的唯一标识，不能重复
@@ -662,6 +667,7 @@ public void insertUser() {
 </select>
 ```
 - 若字段名和实体类中的属性名不一致，但是字段名符合数据库的规则（使用_），实体类中的属性名符合Java的规则（使用驼峰）。此时也可通过以下两种方式处理字段名和实体类中的属性的映射关系  
+
 	1. 可以通过为字段起别名的方式，保证和实体类中的属性名保持一致  
 		```xml
 		<!--List<Emp> getAllEmp();-->
@@ -671,9 +677,9 @@ public void insertUser() {
 		```
 	2. 可以在MyBatis的核心配置文件中的`setting`标签中，设置一个全局配置信息mapUnderscoreToCamelCase，可以在查询表中数据时，自动将_类型的字段名转换为驼峰，例如：字段名user_name，设置了mapUnderscoreToCamelCase，此时字段名就会转换为userName。[核心配置文件详解](#核心配置文件详解)
 		```xml
-    <settings>
-        <setting name="mapUnderscoreToCamelCase" value="true"/>
-    </settings>
+	<settings>
+	    <setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
 		```
 ## 多对一映射处理
 >查询员工信息以及员工所对应的部门信息
@@ -704,7 +710,7 @@ public class Emp {
 	select * from t_emp left join t_dept on t_emp.eid = t_dept.did where t_emp.eid = #{eid}
 </select>
 ```
-### 使用association处理映射关系
+### 使用 association 处理映射关系
 - association：处理多对一的映射关系
 - property：需要处理多对的映射关系的属性名
 - javaType：该属性的类型
@@ -887,6 +893,7 @@ public void getEmpAndDeptByStepOne() {
 ```
 - 开启后，需要用到查询dept的时候才会调用相应的SQL语句![](Resources/延迟加载测试3.png)
 - fetchType：当开启了全局的延迟加载之后，可以通过该属性手动控制延迟加载的效果，fetchType="lazy(延迟加载)|eager(立即加载)"
+
 	```xml
 	<resultMap id="empAndDeptByStepResultMap" type="Emp">
 		<id property="eid" column="eid"></id>
@@ -900,7 +907,7 @@ public void getEmpAndDeptByStepOne() {
 					 fetchType="lazy"></association>
 	</resultMap>
 	```
-# 动态SQL
+# 动态 SQL
 - Mybatis框架的动态SQL技术是一种根据特定条件动态拼装SQL语句的功能，它存在的意义是为了解决拼接SQL语句字符串时的痛点问题
 ## if
 - if标签可通过test属性（即传递过来的数据）的表达式进行判断，若表达式的结果为true，则标签中的内容会执行；反之标签中的内容不会执行
@@ -952,6 +959,7 @@ public void getEmpAndDeptByStepOne() {
 </select>
 ```
 - 注意：where标签不能去掉条件后多余的and/or
+
 	```xml
 	<!--这种用法是错误的，只能去掉条件前面的and/or，条件后面的不行-->
 	<if test="empName != null and empName !=''">
@@ -1046,6 +1054,7 @@ public void getEmpByChoose() {
 	- open：设置foreach标签中的内容的开始符  
 	- close：设置foreach标签中的内容的结束符
 - 批量删除
+
 	```xml
 	<!--int deleteMoreByArray(Integer[] eids);-->
 	<delete id="deleteMoreByArray">
@@ -1066,6 +1075,7 @@ public void getEmpByChoose() {
 	```
 	![](Resources/foreach测试结果1.png)
 - 批量添加
+
 	```xml
 	<!--int insertMoreByList(@Param("emps") List<Emp> emps);-->
 	<insert id="insertMoreByList">
@@ -1089,7 +1099,7 @@ public void getEmpByChoose() {
 	}
 	```
 	![](Resources/foreach测试结果2.png)
-## SQL片段
+## SQL 片段
 - sql片段，可以记录一段公共sql片段，在使用的地方通过include标签进行引入
 - 声明sql片段：`<sql>`标签
 ```xml
@@ -1102,17 +1112,19 @@ public void getEmpByChoose() {
 	select <include refid="empColumns"></include> from t_emp
 </select>
 ```
-# MyBatis的缓存
-## MyBatis的一级缓存
+# MyBatis 的缓存
+## MyBatis 的一级缓存
 - 一级缓存是SqlSession级别的，通过同一个SqlSession查询的数据会被缓存，下次查询相同的数据，就会从缓存中直接获取，不会从数据库重新访问  
 - 使一级缓存失效的四种情况：  
+
 	1. 不同的SqlSession对应不同的一级缓存  
 	2. 同一个SqlSession但是查询条件不同
 	3. 同一个SqlSession两次查询期间执行了任何一次增删改操作
 	4. 同一个SqlSession两次查询期间手动清空了缓存
-## MyBatis的二级缓存
+## MyBatis 的二级缓存
 - 二级缓存是SqlSessionFactory级别，通过同一个SqlSessionFactory创建的SqlSession查询的结果会被缓存；此后若再次执行相同的查询语句，结果就会从缓存中获取  
 - 二级缓存开启的条件
+
 	1. 在核心配置文件中，设置全局配置属性cacheEnabled="true"，默认为true，不需要设置
 	2. 在映射文件中设置标签<cache />
 	3. 二级缓存必须在SqlSession关闭或提交之后有效
@@ -1133,12 +1145,12 @@ public void getEmpByChoose() {
 - readOnly属性：只读，true/false
 	- true：只读缓存；会给所有调用者返回缓存对象的相同实例。因此这些对象不能被修改。这提供了很重要的性能优势。  
 	- false：读写缓存；会返回缓存对象的拷贝（通过序列化）。这会慢一些，但是安全，因此默认是false
-## MyBatis缓存查询的顺序
+## MyBatis 缓存查询的顺序
 - 先查询二级缓存，因为二级缓存中可能会有其他程序已经查出来的数据，可以拿来直接使用  
 - 如果二级缓存没有命中，再查询一级缓存  
 - 如果一级缓存也没有命中，则查询数据库  
 - SqlSession关闭之后，一级缓存中的数据会写入二级缓存
-## 整合第三方缓存EHCache（了解）
+## 整合第三方缓存 EHCache（了解）
 ### 添加依赖
 ```xml
 <!-- Mybatis EHCache整合包 -->
@@ -1162,7 +1174,7 @@ public void getEmpByChoose() {
 | slf4j-api | SLF4J日志门面包 |
 | logback-classic | 支持SLF4J门面接口的一个具体实现 |
 
-### 创建EHCache的配置文件ehcache.xml
+### 创建 EHCache 的配置文件 ehcache.xml
 - 名字必须叫`ehcache.xml`
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
@@ -1187,7 +1199,7 @@ public void getEmpByChoose() {
 ```xml
 <cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
 ```
-### 加入logback日志
+### 加入 logback 日志
 - 存在SLF4J时，作为简易日志的log4j将失效，此时我们需要借助SLF4J的具体实现logback来打印日志。创建logback的配置文件`logback.xml`，名字固定，不可改变
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -1211,7 +1223,7 @@ public void getEmpByChoose() {
     <logger name="com.atguigu.crowd.mapper" level="DEBUG"/>
 </configuration>
 ```
-### EHCache配置文件说明
+### EHCache 配置文件说明
 | 属性名 | 是否必须 | 作用 |
 | --- | --- | --- |
 | maxElementsInMemory | 是 | 在内存中缓存的element的最大数目 |
@@ -1224,7 +1236,7 @@ public void getEmpByChoose() {
 | diskPersistent | 否 | 在VM重启的时候是否启用磁盘保存EhCache中的数据，默认是false |
 | diskExpiryThreadIntervalSeconds | 否 | 磁盘缓存的清理线程运行间隔，默认是120秒。每个120s， 相应的线程会进行一次EhCache中数据的清理工作 |
 | memoryStoreEvictionPolicy | 否 | 当内存缓存达到最大，有新的element加入的时候， 移除缓存中element的策略。 默认是LRU（最近最少使用），可选的有LFU（最不常使用）和FIFO（先进先出 |
-# MyBatis的逆向工程
+# MyBatis 的逆向工程
 - 正向工程：先创建Java实体类，由框架负责根据实体类生成数据库表。Hibernate是支持正向工程的
 - 逆向工程：先创建数据库表，由框架负责根据数据库表，反向生成如下资源：  
 	- Java实体类  
@@ -1294,7 +1306,7 @@ public void getEmpByChoose() {
 	</plugins>
 </build>
 ```
-### 创建MyBatis的核心配置文件
+### 创建 MyBatis 的核心配置文件
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE configuration
@@ -1364,7 +1376,7 @@ public void getEmpByChoose() {
     </context>
 </generatorConfiguration>
 ```
-### 执行MBG插件的generate目标
+### 执行 MBG 插件的 generate 目标
 - ![](Resources/执行MBG插件的generate目标.png)
 - 如果出现报错：`Exception getting JDBC Driver`，可能是pom.xml中，数据库驱动配置错误
 	- dependency中的驱动![](Resources/dependency中的驱动.png)
@@ -1460,10 +1472,11 @@ public void testPageHelper() throws IOException {
 }
 ```
 - 分页相关数据：
+
 	```
 	Page{count=true, pageNum=1, pageSize=4, startRow=0, endRow=4, total=8, pages=2, reasonable=false, pageSizeZero=false}[Emp{eid=1, empName='admin', age=22, sex='男', email='456@qq.com', did=3}, Emp{eid=2, empName='admin2', age=22, sex='男', email='456@qq.com', did=3}, Emp{eid=3, empName='王五', age=12, sex='女', email='123@qq.com', did=3}, Emp{eid=4, empName='赵六', age=32, sex='男', email='123@qq.com', did=1}]
 	```
-#### 方法二使用PageInfo
+#### 方法二使用 PageInfo
 - 在查询获取list集合之后，使用`PageInfo<T> pageInfo = new PageInfo<>(List<T> list, intnavigatePages)`获取分页相关数据
 	- list：分页之后的数据  
 	- navigatePages：导航分页的页码数
@@ -1482,6 +1495,7 @@ public void testPageHelper() throws IOException {
 }
 ```
 - 分页相关数据：
+
 	```
 	PageInfo{
 	pageNum=1, pageSize=4, size=4, startRow=1, endRow=4, total=8, pages=2, 
