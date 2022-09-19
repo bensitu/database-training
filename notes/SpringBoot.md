@@ -1,14 +1,14 @@
 ## SpringBoot
 
-**今日目标：**
+**目标：**
 
-> * 掌握基于SpringBoot框架的程序开发步骤
-> * 熟练使用SpringBoot配置信息修改服务器配置
-> * 基于SpringBoot的完成SSM整合项目开发
+> * 掌握基于 SpringBoot 框架的程序开发步骤
+> * 熟练使用 SpringBoot 配置信息修改服务器配置
+> * 基于 SpringBoot 的完成 SSM 整合项目开发
 
 ## 1，SpringBoot 简介
 
-`SpringBoot` 是由 `Pivotal` 团队提供的全新框架，其设计目的是用来==简化== `Spring` 应用的==初始搭建==以及==开发过程==。
+`SpringBoot` 是由 `Pivotal` 团队提供的全新框架，其设计目的是用来**简化** `Spring` 应用的**初始搭建**以及**开发过程**。
 
 使用了 `Spring` 框架后已经简化了我们的开发。而 `SpringBoot` 又是对 `Spring` 开发进行简化的，可想而知 `SpringBoot` 使用的简单及广泛性。既然 `SpringBoot` 是用来简化 `Spring` 开发的，那我们就先回顾一下，以 `SpringMVC` 开发为例：
 
@@ -26,7 +26,7 @@
 
 <img src="Resources/image-20210911133219847.png" alt="image-20210911133219847" style="zoom:50%;" />
 
-​	做到这只是将工程的架子搭起来。要想被外界访问，最起码还需要提供一个 `Controller` 类，在该类中提供一个方法。
+做到这只是将工程的架子搭起来。要想被外界访问，最起码还需要提供一个 `Controller` 类，在该类中提供一个方法。
 
 4. **编写 `Controller` 类**
 
@@ -40,10 +40,10 @@
 
 `SpringBoot` 开发起来特别简单，分为如下几步：
 
-* 创建新模块，选择Spring初始化，并配置模块相关基础信息
+* 创建新模块，选择 Spring 初始化，并配置模块相关基础信息
 * 选择当前模块需要使用的技术集
 * 开发控制器类
-* 运行自动生成的Application类
+* 运行自动生成的 Application 类
 
 知道了 `SpringBoot` 的开发步骤后，接下来我们进行具体的操作
 
@@ -55,7 +55,7 @@
 
 * 选择 `Spring Initializr` ，用来创建 `SpringBoot` 工程
 
-  以前我们选择的是 `Maven` ，今天选择 `Spring Initializr` 来快速构建 `SpringBoot` 工程。而在 `Module SDK` 这一项选择我们安装的 `JDK` 版本。
+  以前我们选择的是 `Maven` ，今天选择 `Spring Initializr` 来快速构建 `SpringBoot` 工程。而在 `Module SDK` 这一项选择我们在本机上安装的相应 `JDK` 版本。
 
 <img src="Resources/image-20210911155249493.png" alt="image-20210911155249493" style="zoom:60%;" />
 
@@ -65,7 +65,7 @@
 
   <img src="Resources/image-20210911155916899.png" alt="image-20210911155916899" style="zoom:67%;" />
 
-  > ==注意：打包方式这里需要设置为 `Jar`==
+  > 注意：打包方式这里需要设置为 `Jar`
 
 * 选中 `Web`，然后勾选 `Spring Web`
 
@@ -81,7 +81,7 @@
 
 <img src="Resources/image-20210911160541833.png" alt="image-20210911160541833" style="zoom:80%;" />
 
-> ==注意：==
+> 注意：
 >
 > 1. 在创建好的工程中不需要创建配置类
 >
@@ -408,7 +408,7 @@ public class Springboot01QuickstartApplication {
 
   因为我们在 `pom.xml` 中配置了 `spring-boot-starter-web` 依赖，而该依赖通过前面的学习知道它依赖 `tomcat` ，所以运行 `main` 方法就可以使用 `tomcat` 启动咱们的工程。
 
-#### 1.2.3  切换web服务器
+#### 1.2.3  切换 web 服务器
 
 现在我们启动工程使用的是 `tomcat` 服务器，那能不能不使用 `tomcat` 而使用 `jetty` 服务器，`jetty` 在我们 `maven` 高级时讲 `maven` 私服使用的服务器。而要切换 `web` 服务器就需要将默认的 `tomcat` 服务器给排除掉，怎么排除呢？使用 `exclusion` 标签
 
@@ -627,7 +627,7 @@ server:
 >       root: info
 >   ```
 
-### 2.2  yaml格式
+### 2.2  yaml 格式
 
 上面讲了三种不同类型的配置文件，而 `properties` 类型的配合文件之前我们学习过，接下来我们重点学习 `yaml` 类型的配置文件。
 
@@ -708,7 +708,7 @@ enterprise:
     - 大数据
 ```
 
-### 2.3  yaml配置文件数据读取
+### 2.3  yaml 配置文件数据读取
 
 #### 2.3.1  环境准备
 
@@ -794,7 +794,7 @@ public class BookController {
 }
 ```
 
-##### 2.3.2.2  Environment对象
+##### 2.3.2.2  Environment 对象
 
 上面方式读取到的数据特别零散，`SpringBoot` 还可以使用 `@Autowired` 注解注入 `Environment` 对象的方式读取数据。这种方式 `SpringBoot` 会将配置文件中所有的数据封装到 `Environment` 对象中，如果需要使用哪个数据只需要通过调用 `Environment` 对象的 `getProperty(String name)` 方法获取。具体代码如下：
 
@@ -935,7 +935,7 @@ public class BookController {
 
 来回的修改配置会很麻烦，而 `SpringBoot` 给开发者提供了多环境的快捷配置，需要切换环境时只需要改一个配置即可。不同类型的配置文件多环境开发的配置都不相同，接下来对不同类型的配置文件进行说明
 
-#### 2.4.1  yaml文件
+#### 2.4.1  yaml 文件
 
 在 `application.yml` 中使用 `---` 来分割不同的配置，内容如下
 
@@ -1010,7 +1010,7 @@ spring:
       on-profile: dev
 ```
 
-#### 2.4.2  properties文件
+#### 2.4.2  properties 文件
 
 `properties` 类型的配置文件配置多环境需要定义不同的配置文件
 
@@ -1157,7 +1157,7 @@ server:
 >
 > SpringBoot 2.5.0版本存在一个bug，我们在使用这个版本时，需要在 `jar` 所在位置的 `config` 目录下创建一个任意名称的文件夹
 
-## 3，SpringBoot整合junit
+## 3，SpringBoot 整合 junit
 
 回顾 `Spring` 整合 `junit`
 
@@ -1226,7 +1226,7 @@ class Springboot07TestApplicationTests {
 }
 ```
 
-> ==注意：==这里的引导类所在包必须是测试类所在包及其子包。
+> 注意：这里的引导类所在包必须是测试类所在包及其子包。
 >
 > 例如：
 >
@@ -1235,9 +1235,9 @@ class Springboot07TestApplicationTests {
 >
 > 如果不满足这个要求的话，就需要在使用 `@SpringBootTest` 注解时，使用 `classes` 属性指定引导类的字节码对象。如 `@SpringBootTest(classes = Springboot07TestApplication.class)`
 
-## 4，SpringBoot整合mybatis
+## 4，SpringBoot 整合 mybatis
 
-### 4.1  回顾Spring整合Mybatis
+### 4.1  回顾 Spring 整合 Mybatis
 
 `Spring` 整合 `Mybatis` 需要定义很多配置类
 
@@ -1308,7 +1308,7 @@ class Springboot07TestApplicationTests {
     
     ```
 
-### 4.2  SpringBoot整合mybatis
+### 4.2  SpringBoot 整合 mybatis
 
 #### 4.2.1  创建模块
 
@@ -1337,7 +1337,7 @@ public class Book {
 }
 ```
 
-#### 4.2.3  定义dao接口
+#### 4.2.3  定义 dao 接口
 
 在 `com.itheima.dao` 包下定义 `BookDao` 接口，内容如下
 
@@ -1400,11 +1400,11 @@ public interface BookDao {
 }
 ```
 
-> ==注意：==
+> 注意：
 >
 > `SpringBoot` 版本低于2.4.3(不含)，Mysql驱动版本大于8.0时，需要在url连接串中配置时区 `jdbc:mysql://localhost:3306/ssm_db?serverTimezone=UTC`，或在MySQL数据库端配置时区解决此问题
 
-#### 4.2.7  使用Druid数据源
+#### 4.2.7  使用 Druid 数据源
 
 现在我们并没有指定数据源，`SpringBoot` 有默认的数据源，我们也可以指定使用 `Druid` 数据源，按照以下步骤实现
 

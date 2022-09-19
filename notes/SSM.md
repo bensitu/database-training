@@ -1,14 +1,14 @@
 # 一、 MyBatis
 
-## 1、  MyBatis简介
+## 1、  MyBatis 简介
 
-### 1.1 MyBatis历史
+### 1.1 MyBatis 历史
 
 MyBatis最初是Apache的一个开源项目 iBatis , 2010年 6 月这个项目由Apache Software Foundation迁移到了Google Code。随着开发团队转投Google Code旗下， iBatis3.x正式更名为MyBatis。代码于2013 年 11 月迁移到Github。iBatis一词来源于“internet”和“abatis”的组合，是一个基于Java的持久层框架。 iBatis提供的持久层框架包括SQL Maps和Data Access Objects（DAO）。
 
 
 
-### 1.2 MyBatis特性
+### 1.2 MyBatis 特性
 
 - MyBatis 是支持定制化 SQL、存储过程以及高级映射的优秀的持久层框架
 - MyBatis 避免了几乎所有的 JDBC 代码和手动设置参数以及获取结果集
@@ -17,7 +17,7 @@ MyBatis最初是Apache的一个开源项目 iBatis , 2010年 6 月这个项目�
 
 
 
-### 1.3 MyBatis下载
+### 1.3 MyBatis 下载
 
 MyBatis下载地址：https://github.com/mybatis/mybatis-
 
@@ -8389,5 +8389,4 @@ th:href="@{'/employee/page/'+${num}}" th:text="${num} "></a>
 ③访问测试分页功能
 
 localhost:8080/employee/page/1
-
 
