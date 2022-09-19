@@ -73,7 +73,7 @@ public class RandomExample {
 
 1、定义x和y的值，修改该值可以随机不同范围的整数。
 
-2、调用Random中的nextInt(int n)方法，计算随机数。
+2、调用 Random 中的 nextInt(int n)方法，计算随机数。
 
 3、将结果打印到控制台。
 
