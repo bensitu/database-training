@@ -1062,9 +1062,9 @@ sql片段，可以记录一段公共sql片段，在使用的地方通过include�
 
 
 
-## 10 、MyBatis的缓存
+## 10 、MyBatis 的缓存
 
-### 10.1 MyBatis的一级缓存
+### 10.1 MyBatis 的一级缓存
 
 一级缓存是SqlSession级别的，通过同一个SqlSession查询的数据会被缓存，下次查询相同的数据，就会从缓存中直接获取，不会从数据库重新访问
 
@@ -1080,7 +1080,7 @@ sql片段，可以记录一段公共sql片段，在使用的地方通过include�
 
 
 
-### 10.2 MyBatis的二级缓存
+### 10.2 MyBatis 的二级缓存
 
 二级缓存是SqlSessionFactory级别，通过同一个SqlSessionFactory创建的SqlSession查询的结果会被缓存；此后若再次执行相同的查询语句，结果就会从缓存中获取
 
